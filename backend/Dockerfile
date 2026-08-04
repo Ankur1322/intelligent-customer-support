@@ -33,5 +33,5 @@ RUN mkdir -p uploads faiss_index
 # Expose uvicorn port
 EXPOSE 8000
 
-# Start application using uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start application using uvicorn binding to dynamic PORT for cloud scaling
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
