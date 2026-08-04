@@ -3,9 +3,22 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.utils.config import settings
 
+db_url = settings.DATABASE_URL
+
+# 1. Resolve PostgreSQL dialect mismatch (Render returns 'postgres://', SQLAlchemy expects 'postgresql://')
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+# 2. Force SSL mode on cloud environments (like Render) to avoid pg_hba.conf connection denials
+if "sslmode" not in db_url and "localhost" not in db_url and "db:5432" not in db_url:
+    if "?" in db_url:
+        db_url = f"{db_url}&sslmode=require"
+    else:
+        db_url = f"{db_url}?sslmode=require"
+
 # Create database engine with pool pre-ping to ensure active connection checking in production
 engine = create_engine(
-    settings.DATABASE_URL,
+    db_url,
     pool_pre_ping=True
 )
 
