@@ -2,7 +2,7 @@ services:
   # 1. Backend Web Service (FastAPI Docker)
   - type: web
     name: support-ai-backend
-    env: docker
+    runtime: docker
     dockerContext: ./backend
     dockerfilePath: ./backend/Dockerfile
     plan: free
@@ -32,10 +32,11 @@ services:
         value: "0.3"
 
   # 2. Frontend Web Service (React Static CDN)
-  - type: static
+  - type: web
     name: support-ai-frontend
+    runtime: static
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: ./frontend/dist
+    staticPublishPath: ./frontend/dist
     headers:
       - path: /*
         name: Cache-Control
