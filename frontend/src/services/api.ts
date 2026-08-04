@@ -8,13 +8,13 @@ let API_BASE_URL = 'http://localhost:8000/api';
 
 if (typeof window !== 'undefined' && window.location) {
   const hostname = window.location.hostname;
-  if (hostname.includes('onrender.com')) {
-    // Dynamically align the frontend and backend using Render's account resource suffix
+  if ((import.meta as any).env && (import.meta as any).env.VITE_API_BASE_URL) {
+    API_BASE_URL = (import.meta as any).env.VITE_API_BASE_URL;
+  } else if (hostname.includes('onrender.com')) {
+    // Dynamically align the frontend and backend using Render's account resource suffix as a fallback
     const match = hostname.match(/support-ai-frontend(-[a-zA-Z0-9]+)?\.onrender\.com/);
     const suffix = match && match[1] ? match[1] : '';
     API_BASE_URL = `https://support-ai-backend${suffix}.onrender.com/api`;
-  } else if ((import.meta as any).env && (import.meta as any).env.VITE_API_BASE_URL) {
-    API_BASE_URL = (import.meta as any).env.VITE_API_BASE_URL;
   }
 }
 
