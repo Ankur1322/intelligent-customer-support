@@ -1,0 +1,12 @@
+========================================================================
+SUPPORTAI SYSTEMS - OFFICIAL TERMS OF SERVICE & REFUND POLICY
+========================================================================
+
+1. 30-DAY SATISFACTION REFUND GUARANTEE
+We offer a full 100% refund on all SaaS subscription tiers within the first 30 days of initial purchase. To claim a refund, customers must open a billing ticket through their dashboard or email billing@supportai-corp.com with their invoice reference number. After 30 days, subscriptions are non-refundable and will auto-renew unless cancelled.
+
+2. HARDWARE AND TERMINAL RETURNS
+All physical assistant terminals are subject to a 15-day return policy. Returns must be shipped in their original packaging, containing all cables, manuals, and accessories. A restocking fee of 15% will be deducted from the refund total if physical hardware displays wear, modifications, or light scratches.
+
+3. WORKSPACE SEAT CREDITS
+If you downgrade your workspace tier mid-billing-cycle, seat credits are automatically computed on a pro-rata basis and deposited as credits into your account balance. These credits can only be applied to future billing cycles and are non-convertible to direct cash.

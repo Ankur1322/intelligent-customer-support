@@ -1,0 +1,19 @@
+========================================================================
+SUPPORTAI SYSTEMS - OFFICIAL CUSTOMER FREQUENTLY ASKED QUESTIONS (FAQ)
+========================================================================
+
+1. GENERAL BUSINESS WORKING HOURS
+Our corporate offices are open Monday through Friday, from 8:00 AM to 6:00 PM Eastern Standard Time (EST). We are closed on all major US federal holidays. 
+
+2. CONTACTING TECHNICAL SUPPORT
+For direct technical support, customers may contact our help desk via email at support@supportai-corp.com or call our toll-free hotline at 1-800-555-0199 during corporate working hours. For emergency tier-3 issues outside of working hours, authorized admins can trigger a page on Slack via the channel #systems-emergency.
+
+3. PASSWORD RESET PROTOCOLS
+To securely reset your user password:
+- Go to the login portal and click "Forgot Password".
+- Enter your registered corporate email address.
+- A secure 6-digit verification code will be sent to your email (expires in 10 minutes).
+- Enter the 6-digit code on the screen and define your new secure password (must be at least 8 characters, containing 1 number and 1 special symbol).
+
+4. REMOTE COMPILING NODES
+We maintain compiling servers in US-East (Virginia) and EU-West (Ireland) regions. These compiling nodes automatically sync code structures every 15 minutes.

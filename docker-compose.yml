@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # Database Service (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: support_ai_db
+    restart: always
+    environment:
+      - POSTGRES_DB=customer_support_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d customer_support_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Backend API Service (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: support_ai_backend
+    restart: always
+    env_file:
+      - ./backend/.env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/customer_support_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - uploads_data:/workspace/uploads
+      - faiss_data:/workspace/faiss_index
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Frontend Web Service (React Served by Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: support_ai_frontend
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  uploads_data:
+  faiss_data:
