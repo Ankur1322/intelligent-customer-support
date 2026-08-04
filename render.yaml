@@ -1,0 +1,58 @@
+services:
+  # 1. Backend Web Service (FastAPI Docker)
+  - type: web
+    name: support-ai-backend
+    env: docker
+    dockercontext: ./backend
+    dockerfile: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: support-ai-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true  # Render will automatically generate a secure random secret key on boot
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: LLM_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false  # Render will prompt you to enter your private key securely in their UI (git-safe!)
+      - key: EMBEDDING_MODEL_NAME
+        value: gemini-embedding-001
+      - key: FAISS_INDEX_PATH
+        value: faiss_index
+      - key: TOP_K
+        value: "4"
+      - key: CONFIDENCE_THRESHOLD
+        value: "0.3"
+
+  # 2. Frontend Web Service (React Static CDN)
+  - type: web
+    name: support-ai-frontend
+    env: static
+    plan: free
+    region: oregon
+    buildCommand: cd frontend && npm install && npm run build
+    publishPath: ./frontend/dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+# 3. Database Cluster (PostgreSQL 15)
+databases:
+  - name: support-ai-postgres
+    databaseName: customer_support_db
+    user: postgres
+    plan: free
+    region: oregon
+    postgresMajorVersion: "15"
