@@ -37,6 +37,12 @@ services:
     runtime: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: support-ai-backend
+          property: host
     headers:
       - path: /*
         name: Cache-Control

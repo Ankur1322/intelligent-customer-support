@@ -4,7 +4,10 @@ import {
   ConversationDetail, Message, QueryLog, AnalyticsDashboard 
 } from '../types';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+let API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+if (API_BASE_URL && !API_BASE_URL.endsWith('/api') && !API_BASE_URL.endsWith('/api/')) {
+  API_BASE_URL = `${API_BASE_URL.replace(/\/$/, '')}/api`;
+}
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
