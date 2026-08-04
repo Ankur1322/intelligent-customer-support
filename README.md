@@ -1,5 +1,8 @@
 # Intelligent Customer Support AI Assistant (RAG Pipeline)
 
+[![Live App on Render](https://img.shields.io/badge/Render-Live_App-blue?style=for-the-badge&logo=render&logoColor=white)](https://support-ai-frontend-tbqw.onrender.com)
+[![System Design Report](https://img.shields.io/badge/Documentation-System_Design_Report-indigo?style=for-the-badge&logo=googledocs&logoColor=white)](./SYSTEM_DESIGN.pdf)
+
 A production-ready, modular, and containerized Customer Support Assistant utilizing Retrieval-Augmented Generation (RAG) to answer user queries using company documents (PDF, DOCX, TXT) and FAQs. Built with **FastAPI**, **React (Vite + TypeScript + Tailwind)**, **FAISS**, and **PostgreSQL**.
 
 ---

@@ -42,7 +42,7 @@ services:
         fromService:
           type: web
           name: support-ai-backend
-          property: host
+          envVarKey: RENDER_EXTERNAL_URL
     headers:
       - path: /*
         name: Cache-Control

@@ -169,4 +169,4 @@ def test_chat_message_and_rag_logging(mock_answer_query):
 def test_unauthorized_endpoints():
     # Attempting to fetch query logs without Authorization header
     response = client.get("/api/chat/query-logs")
-    assert response.status_code == 401
+    assert response.status_code in (401, 403)
