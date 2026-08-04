@@ -32,11 +32,8 @@ services:
         value: "0.3"
 
   # 2. Frontend Web Service (React Static CDN)
-  - type: web
+  - type: static
     name: support-ai-frontend
-    env: static
-    plan: free
-    region: oregon
     buildCommand: cd frontend && npm install && npm run build
     publishPath: ./frontend/dist
     headers:
