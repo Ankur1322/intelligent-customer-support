@@ -35,11 +35,11 @@ graph TD
     G[User Query Input] -->|Generate Query Embedding| H[FAISS Semantic Search]
     F -->|Cosine Similarity Lookup| H
     H -->|Retrieve Top-K Chunks| I{Similarity Threshold Check}
-    I -->|Below Threshold < 0.3| J[Instantly return "I don't know."]
-    I -->|Above Threshold >= 0.3| K[Assemble Chat History + Context Prompt]
+    I -->|Below Threshold of 0.3| J[Instantly Return 'I don't know']
+    I -->|Above Threshold of 0.3| K[Assemble Chat History + Context Prompt]
     K -->|System Directive Guardrail| L[Google Gemini / OpenAI GPT API]
     L -->|Evaluate Answer| M{Is sufficient info present?}
-    M -->|No| N[Return "I don't know."]
+    M -->|No| N[Return 'I don't know']
     M -->|Yes| O[Return Answer + Sources + Confidence Score]
 ```
 
