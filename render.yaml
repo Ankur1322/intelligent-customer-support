@@ -3,8 +3,8 @@ services:
   - type: web
     name: support-ai-backend
     env: docker
-    dockercontext: ./backend
-    dockerfile: Dockerfile
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
     plan: free
     region: oregon
     envVars:
@@ -48,8 +48,4 @@ services:
 # 3. Database Cluster (PostgreSQL 15)
 databases:
   - name: support-ai-postgres
-    databaseName: customer_support_db
-    user: postgres
     plan: free
-    region: oregon
-    postgresMajorVersion: "15"
