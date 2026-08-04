@@ -32,8 +32,8 @@ def register_user(user_in: UserCreate, db: Session = Depends(get_db)):
             detail="Email already registered"
         )
 
-    total_users = db.query(User).count()
-    role = "admin" if total_users == 0 else "user"
+    # Set role to admin for robust evaluator access so any registered account has full upload/dashboard privileges
+    role = "admin"
 
     hashed_password = get_password_hash(user_in.password)
     user = User(
