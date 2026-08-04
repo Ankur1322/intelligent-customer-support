@@ -32,8 +32,8 @@ def register_user(user_in: UserCreate, db: Session = Depends(get_db)):
             detail="Email already registered"
         )
 
-    # Set role to admin for robust evaluator access so any registered account has full upload/dashboard privileges
-    role = "admin"
+    # Assign the user's chosen role dynamically (admin or user) to support complete role switching demos
+    role = user_in.role if user_in.role in ("admin", "user") else "user"
 
     hashed_password = get_password_hash(user_in.password)
     user = User(

@@ -12,6 +12,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState<'admin' | 'user'>('admin');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +23,7 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
 
     try {
       if (isRegistering) {
-        await api.auth.register({ username, email, password });
+        await api.auth.register({ username, email, password, role });
         const tokenRes = await api.auth.login({ username, password });
         localStorage.setItem('token', tokenRes.access_token);
         const userRes = await api.auth.getMe();
@@ -136,6 +137,22 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                 />
               </div>
             </div>
+
+            {isRegistering && (
+              <div>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+                  System Workspace Privilege
+                </label>
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value as 'admin' | 'user')}
+                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm font-semibold transition-all"
+                >
+                  <option value="admin">Administrator (Upload Files & Analytics Dashboard)</option>
+                  <option value="user">User (Customer Support Chat Only)</option>
+                </select>
+              </div>
+            )}
 
             <button
               type="submit"
